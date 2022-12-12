@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Accès au site des SuRimI</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Accès au site des SuRimI</h1>
+	<h2>Selectionnez les images comportant une lune</h2>
+	<div>
+		<input type="image" id="img1" src="images/Pic1.jpg" onClick="Switch()">
+		<input type="image" id="img2" src="images/Pic2.jpg" onClick="Switch2()">
+
+		<input type="image" id="img3" src="images/Pic3.jpg" onClick="Switch3()">
+
+		<input type="image" id="img4" src="images/Pic4.jpg" onClick="Switch4()">
+
+		<input type="image" id="img5" src="images/Pic5.jpg" onClick="Switch5()">
+
+		<input type="image" id="img6" src="images/Pic6.jpg" onClick="Switch6()">
+
+		<input type="image" id="img7" src="images/Pic7.jpg" onClick="Switch7()">
+
+		<input type="image" id="img8" src="images/Pic8.jpg" onClick="Switch8()">
+
+		<input type="image" id="img9" src="images/Pic9.jpg" onClick="Switch9()">
+	</div>
+	<input type="button" id="btn" value="Je ne suis pas un robot" onClick="check()">
+	
+	<script>
+		var i = 0;
+	   function Switch()
+	  {
+	     var Img = document.getElementById('img1');
+	     if(Img.getAttribute("src") == "images/Pic1.jpg")
+	     {
+	        Img.setAttribute("src", "images/Pic1_bis.jpg");
+	     }
+	     else
+	     {
+	         Img.setAttribute("src", "images/Pic1.jpg");
+	     }
+	   }
+	     function Switch2()
+	     {
+	     	var Img2 = document.getElementById('img2');
+	     	if(Img2.getAttribute("src") == "images/Pic2.jpg")
+		     {
+		        Img2.setAttribute("src", "images/Pic2_bis.jpg");
+		        i+=2;
+		     }
+		     else
+		     {
+		         Img2.setAttribute("src", "images/Pic2.jpg");
+		         if (i) i-=2;
+		     }
+	     }
+	     
+	     function Switch3()
+	     {
+	     	var Img3 = document.getElementById('img3');
+			if(Img3.getAttribute("src") == "images/Pic3.jpg")
+			{
+				Img3.setAttribute("src", "images/Pic3_bis.jpg");
+				i+=3;
+			}
+			else
+			{
+				Img3.setAttribute("src", "images/Pic3.jpg");
+				if (i) i-=3;
+			}
+	 	}
+
+	 	function Switch4()
+	 	{
+	 		var Img4 = document.getElementById('img4');
+			if(Img4.getAttribute("src") == "images/Pic4.jpg")
+			{
+				Img4.setAttribute("src", "images/Pic4_bis.jpg");
+				i+=4;
+			}
+			else
+			{
+				Img4.setAttribute("src", "images/Pic4.jpg");
+				if (i) i-=4;
+			}
+	 	}
+
+	 	function Switch5()
+	 	{
+	 		var Img5 = document.getElementById('img5');
+	 		if(Img5.getAttribute("src") == "images/Pic5.jpg")
+			{
+				Img5.setAttribute("src", "images/Pic5_bis.jpg");
+			}
+			else
+			{
+				Img5.setAttribute("src", "images/Pic5.jpg");
+			}
+	 	}
+
+	     
+	 	function Switch6()
+	 	{
+	 		var Img6 = document.getElementById('img6');
+	 		if(Img6.getAttribute("src") == "images/Pic6.jpg")
+			{
+				Img6.setAttribute("src", "images/Pic6_bis.jpg");
+			}
+			else
+			{
+				Img6.setAttribute("src", "images/Pic6.jpg");
+			}
+	 	}
+	     
+	 	function Switch7()
+	 	{
+	 		var Img7 = document.getElementById('img7');
+	 		if(Img7.getAttribute("src") == "images/Pic7.jpg")
+			{
+				Img7.setAttribute("src", "images/Pic7_bis.jpg");
+			}
+			else
+			{
+				Img7.setAttribute("src", "images/Pic7.jpg");
+			}
+	 	}
+	     
+	 	function Switch8()
+	 	{
+	 		var Img8 = document.getElementById('img8');
+	 		if(Img8.getAttribute("src") == "images/Pic8.jpg")
+			{
+				Img8.setAttribute("src", "images/Pic8_bis.jpg");
+				i+=8;
+			}
+			else
+			{
+				Img8.setAttribute("src", "images/Pic8.jpg");
+				if (i) i-=8;
+			}
+	 	}
+	    
+	    function Switch9()
+	    {
+	    	var Img9 = document.getElementById('img9');
+	    	if(Img9.getAttribute("src") == "images/Pic9.jpg")
+	     	{
+	        	Img9.setAttribute("src", "images/Pic9_bis.jpg");
+	        	i+=9;
+	     	}
+	     	else
+	     	{
+	        	Img9.setAttribute("src", "images/Pic9.jpg");
+	        	if (i) i-=9;
+	     	}
+	    }
+
+	    function check()
+	    {
+	    	if (i == 26) document.location.href='./nuit-info.html';
+	    }
+	</script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="nuit-info.css" />
+    <link rel="shortcut icon" href="A REMPLIR" />
+    <title>Equipe SuRimI / UPSSITECH</title>
+  </head>
+
+  <body>
+    <div class="background">
+      <img id="globule1" src="./img/globule-rouge1.png" alt="Globule rouge" onclick={clickGlobule()}>
+      <img id="globule2" src="./img/globule-rouge2.png" alt="Globule rouge" onclick={clickGlobule()}>
+      <img id="globule3" src="./img/globule-rouge3.png" alt="Globule rouge" onclick={clickGlobule()}>
+      <img id="globule4" src="./img/globule-rouge4.png" alt="Globule rouge" onclick={clickGlobule()}>
+      <img id="globuleinfecte1" src="./img/globule-rouge-infecté1.png" alt="Globule rouge infecté" onclick={clickGlobule()}>
+      <img id="globuleinfecte1" src="./img/globule-rouge-infecté2.png" alt="Globule rouge infecté" onclick={clickGlobule()}>
+    </div>
+    <header>
+      <a href="./nuit-info.html">ACCUEIL</a>
+      <a href="./maladies/sida.html">INFECTIONS</a>
+      <a href="./defi_ubisoft.html">DEFI UBISOFT</a>
+      <a href="./equipe.html">EQUIPE</a>
+    </header>
+    <div class="content">
+      <div class="presentation">
+        <h1>Aujourd’hui, l’équipe SuRimI a pour but de</h1>
+        <p>Décomplexer et déculpabiliser les jeunes adultes de leurs vies sexuelles.</p>
+        <p>On peut effectivement se renseigner à travers un jeu, pleins de surprises  ( je ne vous spoile pas le contenu, à vous de le découvrir), quelques pages utiles pour s’informer sur la sexualité notamment les infections, la prévention pour ces derniers et aussi les phobies.</p>
+      </div>
+      <div class="menu">
+        <div>
+          <h2><a href="./maladies/sida.html">Infections</a></h2>
+          <hr>
+          <div>
+            <p>Autrefois appelées MST, les IST (Infection Sexuellement Transmissibles) sont dues à des bactéries, virus ou parasites transmis entre les partenaires lors d’une relation sexuelle</p>
+          </div>
+        </div>
+        <div>
+          <h2><a href="./maladies/prevention_depistage.html">Prévention et dépistage</a></h2>
+          <hr>
+          <div>
+            <p>Prévenir et reconnaître une infection sexuellement transmissible (IST) est capital. En effet, dès que le diagnostic est posé, des mesures pour éviter la transmission sont indispensables ainsi qu’un traitement précoce lorsqu’il est possible.</p>
+          </div>
+        </div>
+        <div>
+          <h2><a href="./maladies/phobies.html">Phobies sexuelles</a></h2>
+          <hr>
+          <div>
+            <p>L’anxiété sexuelle résume à elle seule l’intégralité des maux dont est responsable la sexualité. Chaque phobie est intimement liée au désir, à son refoulement, à son expression et à sa possible frustration.</p>
+          </div>
+        </div>
+      </div>
+      <div class="jeu">
+        <canvas id="myCanvas" width="480" height="320"></canvas>
+      </div>
+    </div>
+    <footer>
+      <div>
+        <img src="./img/logo_upssitech.png">
+        <div>
+          <h2>Siège social</h2>
+          <p>118 route de Narbonne</p>
+          <p>31400, TOULOUSE</p>
+        </div>
+        <div>
+          <h2>Email</h2>
+          <p>contact@prevention.com</p>
+        </div>
+        <img src="./img/logo_ut3.jpg">
+      </div>
+    </footer>
+    <script>
+      var GlobuleRouge = 5;
+      function clickGlobule(){
+              GlobuleRouge -= 1;
+              console.log('ok');
+              if(GlobuleRouge < 0){
+                  document.location.href='./easter_egg.html';
+              }
+      }
+    </script>
+
+<script type="text/javascript">
+  const canvas = document.getElementById("myCanvas");
+	const ctx = canvas.getContext("2d");
+	const hero = new Image();
+	hero.src = './img_jeu/vaisseau_sida.png';
+	const bullets = new Image();
+	bullets.src = './img_jeu/fireball_1.png';
+	const ennemie_1 = new Image();
+	ennemie_1.src = './img_jeu/vih.png';
+	const ennemie_2 = new Image();
+	ennemie_2.src = './img_jeu/virus_2.png';
+	const ennemie_3 = new Image();
+	ennemie_3.src = './img_jeu/virus_3.png';
+	const ennemie_4 = new Image();
+	ennemie_4.src = './img_jeu/virus_4.png';
+
+	var score = 0;
+	var vie = 3;
+	var max = 480;
+	var x =  canvas.width/2;
+	var y = 50;
+	var dx = 1;
+	var dy = 1;
+
+	var rightPressed = false;
+	var leftPressed = false;
+	var spacePressed = false;
+	var Rpressed = false;
+
+	var bullet_x = -100;
+	var bullet_y = -100;
+
+	var multiplicateur_vitesse = 1.0;
+
+	var ennemie_x_1 = canvas.width/2;
+	var ennemie_y_1 = 350;
+	var ennemie_x_2 = canvas.width/2-100;
+	var ennemie_y_2 = 700;
+	var ennemie_x_3 = canvas.width/2+100;
+	var ennemie_y_3 = 900;
+	var ennemie_x_4 = canvas.width/2-150;
+	var ennemie_y_4 = 1200;
+
+	document.addEventListener("keydown", keyDownHandler, false);
+	document.addEventListener("keyup", keyUpHandler, false);
+
+
+	function draw_hero(){
+		if(vie<1)return;
+		multiplicateur_vitesse += 0.0000001;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ennemie_y_1 -= 0.5;
+		if(rightPressed){
+			x += dx;
+			if(x-dx > 430){
+				x -= dx;
+			}
+		}else if(leftPressed) {
+    		x -= dx;
+    		if (x+dx < 0){
+        		x += dx;
+    		}
+		}
+			ennemie_y_2 -= 0.9*multiplicateur_vitesse;
+			if(ennemie_y_2<0){
+				ennemie_y_2 = 350;
+				ennemie_x_2 =  Math.floor(Math.random() *  Math.floor(Math.random() * max));
+				vie -= 1;
+			}
+			if(bullet_x > ennemie_x_2 - 50 && bullet_x < ennemie_x_2 + 50 && bullet_y > ennemie_y_2 - 10 && bullet_y < ennemie_y_2 + 10){
+				ennemie_y_2 = 400;
+				ennemie_x_2 =  Math.floor(Math.random() *  Math.floor(Math.random() * max));
+				score += 20;	
+				bullet_y = 700;
+			}
+			ennemie_y_1 -= 1*multiplicateur_vitesse;
+			if(ennemie_y_1<0){
+				ennemie_y_1 = 350;
+				ennemie_x_1 =  Math.floor(Math.random() *  Math.floor(Math.random() * max));
+				vie -= 1;
+			}
+			if(bullet_x > ennemie_x_1 - 50 && bullet_x < ennemie_x_1 + 50 && bullet_y > ennemie_y_1 - 10 && bullet_y < ennemie_y_1 + 10){
+				ennemie_y_1 = 400;
+				ennemie_x_1 =  Math.floor(Math.random() *  Math.floor(Math.random() * max));	
+				score += 20;
+				bullet_y = 700;
+			}
+			ennemie_y_3 -= 0.6*multiplicateur_vitesse;
+			if(ennemie_y_3<0){
+				ennemie_x_3 =  Math.floor(Math.random() *  Math.floor(Math.random() * max));
+				ennemie_y_3 = 350;
+				vie -= 1;
+			}
+			if(bullet_x > ennemie_x_3 - 50 && bullet_x < ennemie_x_3 + 50 && bullet_y > ennemie_y_3 - 10 && bullet_y < ennemie_y_3 + 10){
+				ennemie_x_3 =  Math.floor(Math.random() *  Math.floor(Math.random() * max));
+				ennemie_y_3 = 400;	
+				score += 20;
+				bullet_y = 700;
+			}
+			ennemie_y_4 -= 0.2*multiplicateur_vitesse;
+			if(ennemie_y_4<0){
+				ennemie_y_4 = 350;
+				ennemie_x_4 =  Math.floor(Math.random() *  Math.floor(Math.random() * max));
+				vie -= 1;
+			}
+			if(bullet_x > ennemie_x_4 - 50 && bullet_x < ennemie_x_4 + 50 && bullet_y > ennemie_y_4 - 10 && bullet_y < ennemie_y_4 + 10){
+				ennemie_x_2 =  Math.floor(Math.random() *  Math.floor(Math.random() * max));
+				ennemie_y_4 = 400;
+				score += 20;	
+				bullet_y = 700;
+			}
+			ctx.drawImage(hero, x, y,50,30);
+			ctx.beginPath();
+			ctx.closePath();
+			ctx.font = '48px serif';
+  			ctx.fillText(score, 10, 50);
+  			ctx.fillText("Vie:"+vie, 360, 50);
+	}
+
+	function draw_missile(){
+		bullet_y += 1;
+		if(bullet_x>0 && bullet_x<canvas.width && bullet_y>0&& bullet_y<canvas.height){
+		ctx.drawImage(bullets, bullet_x, bullet_y,30,25);
+		ctx.beginPath();
+		ctx.closePath()
+		}
+		if(spacePressed){
+			bullet_x = x+10;
+			bullet_y = y;
+		}
+	}
+
+	function draw_ennemie(){
+			if(vie<1)return;
+			if(ennemie_x_1>0 && ennemie_x_1<canvas.width && ennemie_y_1>0&& ennemie_y_1<canvas.height){
+			ctx.drawImage(ennemie_1, ennemie_x_1, ennemie_y_1,50,30);
+            ctx.beginPath();
+			ctx.closePath();
+			}
+	}
+
+	function draw_ennemie_2(){
+			if(vie<1)return;
+			if(ennemie_x_2>0 && ennemie_x_2<canvas.width && ennemie_y_2>0&& ennemie_y_2<canvas.height){
+			ctx.drawImage(ennemie_2, ennemie_x_2, ennemie_y_2,50,50);
+            ctx.beginPath();
+			ctx.closePath();
+			}
+	}
+
+	function draw_ennemie_3(){
+			if(vie<1)return;
+			if(ennemie_x_3>0 && ennemie_x_3<canvas.width && ennemie_y_3>0&& ennemie_y_3<canvas.height){
+			ctx.drawImage(ennemie_3, ennemie_x_3, ennemie_y_3,50,30);
+            ctx.beginPath();
+			ctx.closePath();
+			}
+	}
+
+	function draw_ennemie_4(){
+			if(vie<1)return;
+			if(ennemie_x_4>0 && ennemie_x_4<canvas.width && ennemie_y_4>0&& ennemie_y_4<canvas.height){
+			ctx.drawImage(ennemie_4, ennemie_x_4, ennemie_y_4,50,50);
+            ctx.beginPath();
+			ctx.closePath();
+			}
+	}
+
+	function keyDownHandler(e) {
+    	if(e.key == "Right" || e.key == "ArrowRight") {
+        	rightPressed = true;
+    	}
+    	else if(e.key == "Left" || e.key == "ArrowLeft") {
+        	leftPressed = true;
+    	}else if(e.key == "Down"|| e.key=="ArrowDown"){
+    		spacePressed = true;
+    	}else if(e.key == "Up" || e.key=="ArrowUp"){
+    		Rpressed = true;
+    	}
+	}	
+
+	function keyUpHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = false;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = false;
+    }else if(e.key == "Down" || e.key=="ArrowDown"){
+    	spacePressed = false;
+    }else if(e.key == "Up" || e.key=="ArrowUp"){
+    	Rpressed = false;
+    }
+	}
+
+	function GameOver(){
+		if(vie<1){
+			ctx.font = '48px serif'; 
+  			ctx.fillText("Game Over", 130, 180);
+  			ctx.font = '26px serif';
+  			ctx.fillText("Appuyer sur ↑ pour recommencer", 75, 220);
+  		}
+  		if(Rpressed){
+  			if(vie == 0){
+  				vie = 3;
+          score = 0;
+  			}
+  		}
+	}
+
+		setInterval(draw_hero, 10);
+		setInterval(draw_missile, 10);
+		setInterval(draw_ennemie, 10);
+		setInterval(draw_ennemie_2, 10);
+		setInterval(draw_ennemie_3, 10);
+		setInterval(draw_ennemie_4, 10);
+		setInterval(GameOver,10);
+</script>
+
+  </body>
+</html>
